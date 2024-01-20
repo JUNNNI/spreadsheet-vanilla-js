@@ -1,0 +1,341 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #313030;
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #a4a5aa;
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar-track:hover {
+    background-color: #ddd;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #7e7e7e;
+}
+
+/* Show which cell has been rendered */
+.sps-cell.debug-tracking {
+    background: #ffe9ce;
+}
+
+/** 
+ * Header
+ * ------------------------------------
+ */
+
+header {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #e1e1e1;
+}
+
+.sps-action-bar {
+    width: 100%;
+    display: flex;
+    background: #edf2fa;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    margin: 0 auto;
+}
+
+.sps-action-bar .actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sps-action-bar .actions > div:last-child {
+    border-left: 1px solid #e1e1e1;
+    padding-left: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-format {
+    width: 28px;
+    height: 28px;
+    padding: 8px;
+}
+
+button {
+    padding: 0;
+    cursor: pointer;
+    background: #c5e0ff;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    transition: all ease-in-out 0.2s;
+}
+
+button:hover {
+    background: #a8c7fa;
+}
+
+button:active {
+    background: #8ba9da;
+}
+
+.actions button {
+    display: flex;
+}
+
+.actions button svg {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#strike {
+    padding: 4px;
+    padding-top: 6px;
+}
+
+#debug,
+button.active {
+    background: #ffd54f;
+}
+
+#debug:hover,
+button.active:hover {
+    background: #fbc02d;
+}
+
+#debug:active,
+button.active:active {
+    background: #f9a825;
+}
+
+#debug.active {
+    background: #d7d7d7;
+}
+
+#debug.active:hover {
+    background: #c4c4c4;
+}
+
+#sps-current-reference {
+    font-weight: 600;
+    border-right: 1px solid #d7d7d7;
+    padding-right: 15px;
+    width: 50px;
+}
+
+.sps-formula-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    position: relative;
+}
+
+.input-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.formula-prefix {
+    position: absolute;
+    margin-left: 5px;
+    pointer-events: none;
+    width: 22px;
+    color: #878787;
+}
+
+.formula-prefix svg {
+    width: 100%;
+    height: 100%;
+}
+
+#sps-input {
+    width: 100%;
+    padding: 0 30px;
+    font-size: 1.4rem;
+}
+
+#sps-input::placeholder {
+    color: gray;
+    font-style: italic;
+}
+
+/**
+ * Spreadsheet Table
+ * ------------------------------------
+ */
+
+.sps-row {
+    display: flex;
+}
+
+.sps-cell {
+    position: relative;
+    height: 100%;
+    padding: 2px 5px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+    background: #fff;
+    transition: background ease-in-out 0.5s;
+    user-select: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/* First row A, B, C, ... */
+.sps-cell-label {
+    justify-content: center;
+    border-color: #bbbbbb;
+    background: #f9f9f9;
+    color: #444746;
+    transition: none;
+}
+
+/* First column 1, 2, 3, ... */
+.sps-cell-number {
+    width: 45px;
+    height: 20px;
+    font-size: 1.2rem;
+    justify-content: center;
+    border-color: #c4c7c5;
+}
+
+.sps-cell.error:not(.sps-cell-label)::before,
+.sps-cell.focus:not(.sps-cell-label)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #1a73e8;
+    pointer-events: none;
+}
+
+.sps-cell-input {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: calc(100% - 2px);
+    padding: 1px 2px;
+    background: #fff;
+    outline: 2px solid #a8c7fa;
+    height: calc(100% - 2px);
+    border: 2px solid #1a73e8;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    color: #313030;
+}
+
+.sps-cell-label.selected {
+    background: #d3e3fd;
+    font-weight: bold;
+}
+
+.sps-cell.bold {
+    font-weight: bold;
+}
+
+.sps-cell.italic {
+    font-style: italic;
+}
+
+.sps-cell.underline {
+    text-decoration: underline;
+}
+
+.sps-cell.strike {
+    text-decoration: line-through;
+}
+
+.sps-cell.underline.strike {
+    text-decoration: underline line-through;
+}
+
+.sps-cell.error {
+    font-weight: bold;
+}
+
+.sps-cell.error:not(.sps-cell-label)::before,
+.sps-cell.error input {
+    border-color: #f17070;
+}
+
+.sps-cell.focus.error:not(.sps-cell-label)::before {
+    border-color: #bf0a0a;
+}
+
+.sps-cell.error input {
+    outline-color: #ffc9c9;
+}
+
+.rebuild {
+    padding: 10px;
+    font-size: 2.2rem;
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: progress;
+    opacity: 0.3;
+    background: #fff;
+    display: none;
+}
+
+.destroyed #overlay {
+    display: block;
+}
+
+/**
+ * Virtual Scroll
+ * ------------------------------------
+ */
+
+.vscroll-container {
+    overflow: auto;
+}
+
+.vscroll-viewport {
+    overflow: hidden;
+}
+
+.vscroll-scroller {
+    border-left: 0;
+    border-bottom: 0;
+    border: 1px solid #bbbbbb;
+    will-change: transform;
+    height: 100%;
+}
+
+.vscroll-row {
+    display: flex;
+}
+
+.destroyed .vscroll-container {
+    overflow: hidden;
+}
